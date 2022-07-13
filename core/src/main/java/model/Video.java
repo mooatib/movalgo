@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Objects;
 
 public class Video {
-    int id;
-    String title;
-    List<String> labels;
+    private int id;
+    private final String title;
+    private final List<String> labels;
 
     public Video(String title, List<String> labels) {
         this.title = title;
