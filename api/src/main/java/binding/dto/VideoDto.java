@@ -3,11 +3,11 @@ package binding.dto;
 import java.util.List;
 
 public class VideoDto {
-    private int id;
+    private String id;
     private String title;
     private List<String> labels;
 
-    public VideoDto(int id, String title, List<String> labels) {
+    public VideoDto(String id, String title, List<String> labels) {
         this.id = id;
         this.title = title;
         this.labels = labels;
@@ -16,11 +16,11 @@ public class VideoDto {
 
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

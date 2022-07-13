@@ -26,7 +26,7 @@ public class VideoRepository {
      * @return Video
      * @throws Exception
      */
-    public Video getById(int id) throws Exception {
+    public Video getById(String id) throws Exception {
         Optional<Video> videoOptional = inMemoryVideos.stream().filter(inMemoryVideo -> inMemoryVideo.getId() == id).findFirst();
         if (videoOptional.isPresent()) {
             return videoOptional.get();
@@ -78,7 +78,7 @@ public class VideoRepository {
      * @param id
      * @throws Exception
      */
-    public void delete(int id) throws Exception {
+    public void delete(String id) throws Exception {
         Optional<Video> videoOptional = inMemoryVideos.stream().filter(inMemoryVideo -> inMemoryVideo.getId() == id).findAny();
         if (videoOptional.isPresent()) {
             Video video = videoOptional.get();

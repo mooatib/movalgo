@@ -19,7 +19,7 @@ public class SerieService {
     }
 
     public void add(Serie serie) {
-        serie.setId(videoRepository.getSize() + 1);
+        serie.setId(String.valueOf(videoRepository.getSize() + 1));
         serieRepository.add(serie);
         videoRepository.add(serie);
     }

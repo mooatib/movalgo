@@ -10,7 +10,7 @@ public class Serie extends Video {
         this.numberOfEpisodes = numberOfEpisodes;
     }
 
-    public Serie(int id, String title, List<String> labels, int numberOfEpisodes) {
+    public Serie(String id, String title, List<String> labels, int numberOfEpisodes) {
         super(id, title, labels);
         this.numberOfEpisodes = numberOfEpisodes;
     }

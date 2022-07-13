@@ -13,7 +13,7 @@ public class Film extends Video {
         this.releaseDate = releaseDate;
     }
 
-    public Film(int id, String title, List<String> labels, String director, LocalDateTime releaseDate) {
+    public Film(String id, String title, List<String> labels, String director, LocalDateTime releaseDate) {
         super(id, title, labels);
         this.director = director;
         this.releaseDate = releaseDate;

@@ -7,7 +7,7 @@ public class FilmDto extends VideoDto {
     private String director;
     private LocalDateTime releaseDate;
 
-    public FilmDto(int id, String title, List<String> labels, String director, LocalDateTime releaseDate) {
+    public FilmDto(String id, String title, List<String> labels, String director, LocalDateTime releaseDate) {
         super(id, title, labels);
         this.director = director;
         this.releaseDate = releaseDate;

@@ -29,7 +29,7 @@ public class VideoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<VideoDto> getById(@PathVariable int id) throws Exception {
+    public ResponseEntity<VideoDto> getById(@PathVariable String id) throws Exception {
         return new ResponseEntity<VideoDto>(videoMapper.toDto(videoService.getById(id)), HttpStatus.OK);
     }
 
@@ -55,7 +55,7 @@ public class VideoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<HttpStatus> delete(@PathVariable int id) throws Exception {
+    public ResponseEntity<HttpStatus> delete(@PathVariable String id) throws Exception {
         videoService.delete(id);
         return new ResponseEntity<HttpStatus>(HttpStatus.OK);
     }

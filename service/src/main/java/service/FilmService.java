@@ -19,7 +19,7 @@ public class FilmService {
     }
 
     public void add(Film film) {
-        film.setId(videoRepository.getSize() + 1);
+        film.setId(String.valueOf(videoRepository.getSize() + 1));
         filmRepository.add(film);
         videoRepository.add(film);
     }

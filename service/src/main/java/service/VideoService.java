@@ -16,11 +16,11 @@ public class VideoService {
     }
 
     public void add(Video video) {
-        video.setId(videoRepository.getSize() + 1);
+        video.setId(String.valueOf(videoRepository.getSize() + 1));
         videoRepository.add(video);
     }
 
-    public Video getById(int id) throws Exception {
+    public Video getById(String id) throws Exception {
         return videoRepository.getById(id);
     }
 
@@ -40,7 +40,7 @@ public class VideoService {
         return videoRepository.getAllDeleted();
     }
 
-    public void delete(int id) throws Exception {
+    public void delete(String id) throws Exception {
         videoRepository.delete(id);
     }
 }

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Video {
-    private int id;
+    private String id;
     private final String title;
     private final List<String> labels;
 
@@ -13,17 +13,17 @@ public class Video {
         this.labels = labels;
     }
 
-    public Video(int id, String title, List<String> labels) {
+    public Video(String id, String title, List<String> labels) {
         this.id = id;
         this.title = title;
         this.labels = labels;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
