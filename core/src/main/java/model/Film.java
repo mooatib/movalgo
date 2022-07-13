@@ -23,7 +23,7 @@ public class Film extends Video {
         return director;
     }
 
-    public LocalDateTime getRelease_date() {
+    public LocalDateTime getReleaseDate() {
         return releaseDate;
     }
 
