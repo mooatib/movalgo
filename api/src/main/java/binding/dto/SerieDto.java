@@ -5,10 +5,12 @@ import java.util.List;
 public class SerieDto extends VideoDto {
     private int numberOfEpisodes;
 
-    public SerieDto(int id, String title, List<String> labels) {
+    public SerieDto(int id, String title, List<String> labels, int numberOfEpisodes) {
         super(id, title, labels);
+        this.numberOfEpisodes = numberOfEpisodes;
     }
-    public SerieDto(){
+
+    public SerieDto() {
 
     }
 
