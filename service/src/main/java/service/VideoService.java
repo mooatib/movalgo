@@ -1,9 +1,12 @@
 package service;
 
+import exception.VideoException;
 import model.Video;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import repository.VideoRepository;
 
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -15,13 +18,22 @@ public class VideoService {
         this.videoRepository = videoRepository;
     }
 
-    public void add(Video video) {
+    public Video add(Video video) throws VideoException.VideoExists {
+        Set<Video> videos = videoRepository.getByTitle(video.getTitle());
+        if (!videos.isEmpty()) {
+            throw new VideoException.VideoExists();
+        }
         video.setId(String.valueOf(videoRepository.getSize() + 1));
-        videoRepository.add(video);
+        Video inMemoryVideo = videoRepository.add(video);
+        LoggerFactory.getLogger(getClass()).info("A video has been created");
+        return inMemoryVideo;
     }
 
-    public Video getById(String id) throws Exception {
-        return videoRepository.getById(id);
+    public Video getById(String id) throws VideoException.VideoNotFound {
+        Optional<Video> videoOptional = videoRepository.getById(id);
+        if (videoOptional.isPresent()) {
+            return videoOptional.get();
+        } else throw new VideoException.VideoNotFound();
     }
 
     public Set<Video> getByTitle(String filter) {
@@ -41,6 +53,7 @@ public class VideoService {
     }
 
     public void delete(String id) throws Exception {
-        videoRepository.delete(id);
+        Video video = getById(id);
+        videoRepository.delete(video);
     }
 }

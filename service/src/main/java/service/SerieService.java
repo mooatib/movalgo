@@ -1,10 +1,15 @@
 package service;
 
+import exception.FilmException;
+import exception.SerieException;
+import exception.VideoException;
 import model.Serie;
+import model.Video;
 import org.springframework.stereotype.Service;
 import repository.SerieRepository;
 import repository.VideoRepository;
 
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -18,13 +23,24 @@ public class SerieService {
         this.videoRepository = videoRepository;
     }
 
-    public void add(Serie serie) {
+    public Serie add(Serie serie) throws SerieException.SerieExists {
+        Set<Video> videos = videoRepository.getByTitle(serie.getTitle());
+        if (!videos.isEmpty()) {
+            throw new SerieException.SerieExists();
+        }
         serie.setId(String.valueOf(videoRepository.getSize() + 1));
-        serieRepository.add(serie);
         videoRepository.add(serie);
+        return serieRepository.add(serie);
     }
 
     public Set<Serie> getAll() {
         return serieRepository.getAll();
+    }
+
+    public Serie getById(String id) throws Exception {
+        Optional<Serie> serieOptional = serieRepository.getById(id);
+        if (serieOptional.isPresent()) {
+            return serieOptional.get();
+        } else throw new SerieException.SerieNotFound();
     }
 }
