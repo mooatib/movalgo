@@ -1,5 +1,6 @@
 package repository;
 
+import model.Film;
 import model.Video;
 import org.springframework.stereotype.Component;
 
@@ -11,14 +12,16 @@ import java.util.stream.Collectors;
 @Component
 public class VideoRepository {
 
-    private static final Set<Video> inMemoryVideos = new HashSet<>();
-    private static final Set<Video> inMemoryDeletedVideos = new HashSet<>();
+
+    private final Set<Video> inMemoryVideos = new HashSet<>();
+    private final Set<Video> inMemoryDeletedVideos = new HashSet<>();
 
     /**
      * @param video
      */
-    public void add(Video video) {
+    public Video add(Video video) {
         inMemoryVideos.add(video);
+        return video;
     }
 
     /**
@@ -27,7 +30,7 @@ public class VideoRepository {
      * @throws Exception
      */
     public Video getById(String id) throws Exception {
-        Optional<Video> videoOptional = inMemoryVideos.stream().filter(inMemoryVideo -> inMemoryVideo.getId() == id).findFirst();
+        Optional<Video> videoOptional = inMemoryVideos.stream().filter(inMemoryVideo -> inMemoryVideo.getId().equals(id)).findFirst();
         if (videoOptional.isPresent()) {
             return videoOptional.get();
         } else throw new Exception("");
@@ -79,11 +82,11 @@ public class VideoRepository {
      * @throws Exception
      */
     public void delete(String id) throws Exception {
-        Optional<Video> videoOptional = inMemoryVideos.stream().filter(inMemoryVideo -> inMemoryVideo.getId() == id).findAny();
+        Optional<Video> videoOptional = inMemoryVideos.stream().filter(inMemoryVideo -> inMemoryVideo.getId().equals(id)).findAny();
         if (videoOptional.isPresent()) {
             Video video = videoOptional.get();
-            inMemoryVideos.remove(videoOptional.get());
-            inMemoryDeletedVideos.add(videoOptional.get());
+            inMemoryVideos.remove(video);
+            inMemoryDeletedVideos.add(video);
         } else throw new Exception("");
     }
 
