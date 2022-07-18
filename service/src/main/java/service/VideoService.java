@@ -23,7 +23,7 @@ public class VideoService {
         if (!videos.isEmpty()) {
             throw new VideoException.VideoExists();
         }
-        video.setId(String.valueOf(videoRepository.getSize() + 1));
+        video.setId(String.valueOf(videoRepository.getSize() + videoRepository.getAllDeleted().size() + 1));
         Video inMemoryVideo = videoRepository.add(video);
         LoggerFactory.getLogger(getClass()).info("A video has been created");
         return inMemoryVideo;
@@ -52,8 +52,8 @@ public class VideoService {
         return videoRepository.getAllDeleted();
     }
 
-    public void delete(String id) throws Exception {
+    public Video delete(String id) throws Exception {
         Video video = getById(id);
-        videoRepository.delete(video);
+        return videoRepository.delete(video);
     }
 }

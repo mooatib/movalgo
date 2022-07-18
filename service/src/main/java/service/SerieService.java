@@ -1,8 +1,6 @@
 package service;
 
-import exception.FilmException;
 import exception.SerieException;
-import exception.VideoException;
 import model.Serie;
 import model.Video;
 import org.springframework.stereotype.Service;
@@ -28,7 +26,7 @@ public class SerieService {
         if (!videos.isEmpty()) {
             throw new SerieException.SerieExists();
         }
-        serie.setId(String.valueOf(videoRepository.getSize() + 1));
+        serie.setId(String.valueOf(videoRepository.getSize() + videoRepository.getAllDeleted().size() + 1));
         videoRepository.add(serie);
         return serieRepository.add(serie);
     }
