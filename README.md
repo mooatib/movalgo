@@ -1,6 +1,6 @@
 # :movie_camera: Movalgo
 
-**Before anything else, please install maven if not already done**
+**Before anything else, please install maven and Java 17 if not already done**
 
 ---
 
