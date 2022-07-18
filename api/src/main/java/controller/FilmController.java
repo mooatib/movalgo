@@ -27,6 +27,11 @@ public class FilmController {
         this.filmMapper = filmMapper;
     }
 
+    /**
+     * This Endpoint allows the user to Post a new Film
+     * @param filmDto   the DTO that will be mapped and transferred to the service
+     * @return          a response based on the request's treatment
+     */
     @Operation(summary = "Create film", tags = "Film")
     @PostMapping("/")
     public ResponseEntity<FilmDto> add(@RequestBody FilmDto filmDto) {
@@ -38,6 +43,10 @@ public class FilmController {
         }
     }
 
+    /**
+     * This Endpoint allows the user to Get all Films
+     * @return          a response based on the request's treatment
+     */
     @Operation(summary = "Retrieve all films", tags = "Film")
     @GetMapping("/")
     public ResponseEntity<Set<FilmDto>> getAll() {

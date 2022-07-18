@@ -1,6 +1,5 @@
 package repository;
 
-import model.Film;
 import model.Serie;
 import org.springframework.stereotype.Component;
 
@@ -14,8 +13,10 @@ public class SerieRepository {
     private static final Set<Serie> inMemorySeries = new HashSet<>();
 
     /**
-     * @param serie
-     * @return
+     * This method add a Serie in memory
+     *
+     * @param serie the Serie that will be added in memory
+     * @return the Serie that has been added
      */
     public Serie add(Serie serie) {
         inMemorySeries.add(serie);
@@ -23,12 +24,20 @@ public class SerieRepository {
     }
 
     /**
-     * @return Set<Video>
+     * This method retrieves a Set of all Series from memory
+     *
+     * @return the Set of all Series in memory
      */
     public Set<Serie> getAll() {
         return inMemorySeries;
     }
 
+    /**
+     * This method retrieves a Serie from memory base on it's id
+     *
+     * @param id the Serie's id that will be retrieved
+     * @return the Serie from memory
+     */
     public Optional<Serie> getById(String id) {
         return inMemorySeries.stream().filter(inMemorySerie -> inMemorySerie.getId().equals(id)).findFirst();
     }
@@ -36,6 +45,7 @@ public class SerieRepository {
     public void delete(Serie serie) {
         inMemorySeries.remove(serie);
     }
+
     /**
      * @return int
      */

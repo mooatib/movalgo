@@ -26,7 +26,9 @@ public class VideoRepository {
     }
 
     /**
-     * @param video
+     * This method add a Video in memory
+     * @param video  the Video that will be added in memory
+     * @return      the Video that has been added
      */
     public Video add(Video video) {
         inMemoryVideos.add(video);
@@ -34,26 +36,29 @@ public class VideoRepository {
     }
 
     /**
-     * @param id
-     * @return Video
-     * @throws Exception
+     * This method retrieves a Video from memory base on it's id
+     *
+     * @param id the Video id that will be retrieved
+     * @return the Video from memory
      */
     public Optional<Video> getById(String id) {
         return inMemoryVideos.stream().filter(inMemoryVideo -> inMemoryVideo.getId().equals(id)).findFirst();
     }
 
     /**
-     * @param filter
-     * @return Set<Video>
+     * This method retrieves a Set of Videos from memory based on a filter
+     * @param filter    the filter that will be searched among the Videos title
+     * @return          the Set of Videos from memory that contains the filter in their title
      */
     public Set<Video> getByTitle(String filter) {
         return inMemoryVideos.stream().filter(inMemoryVideo -> inMemoryVideo.getTitle().contains(filter)).collect(Collectors.toSet());
     }
 
     /**
-     * @param video
-     * @param numberOfMatch
-     * @return Set<Video>
+     * This method retrieves similar Videos based on another
+     * @param video             the Video that will be used in order to search similar videos
+     * @param numberOfMatch     the number of expected matched labels
+     * @return                  a Set of similar Videos
      */
     public Set<Video> getSimilar(Video video, int numberOfMatch) {
         return inMemoryVideos.stream()
@@ -70,21 +75,25 @@ public class VideoRepository {
     }
 
     /**
-     * @return Set<Video>
+     * This method retrieves a Set of all Videos from memory
+     * @return          the Set of all Videos in memory
      */
     public Set<Video> getAll() {
         return inMemoryVideos;
     }
 
     /**
-     * @return Set<Video>
+     * This method retrieves a Set of all deleted Videos from memory
+     * @return          the Set of all deleted Videos in memory
      */
     public Set<Video> getAllDeleted() {
         return inMemoryDeletedVideos;
     }
 
     /**
-     * @param video
+     * This method deletes a Video from memory base on another
+     * @param video     the Video that will be deleted
+     * @return          the deleted Video
      */
     public Video delete(Video video) {
             filmRepository.getById(video.getId()).ifPresent(filmRepository::delete);
@@ -94,9 +103,6 @@ public class VideoRepository {
             return video;
     }
 
-    /**
-     * @return int
-     */
     public int getSize() {
         return inMemoryVideos.size();
     }

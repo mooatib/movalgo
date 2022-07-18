@@ -28,6 +28,11 @@ public class VideoController {
         this.videoMapper = videoMapper;
     }
 
+    /**
+     * This Endpoint allows the user to Post a new Video
+     * @param videoDto   the DTO that will be mapped and transferred to the service
+     * @return          a response based on the request's treatment
+     */
     @Operation(summary = "Create video", tags = "Video")
     @PostMapping("/")
     public ResponseEntity<VideoDto> add(@RequestBody @Valid VideoDto videoDto) {
@@ -39,6 +44,11 @@ public class VideoController {
         }
     }
 
+    /**
+     * This Endpoint allows the user to Get a Video based on id
+     * @param id        the video's id that will be retrieved
+     * @return          a response based on the request's treatment
+     */
     @Operation(summary = "Retrieve video by id", tags = "Video")
     @GetMapping("/{id}")
     public ResponseEntity<VideoDto> getById(@PathVariable String id) {
@@ -55,6 +65,12 @@ public class VideoController {
         return new ResponseEntity<Set<VideoDto>>(videoMapper.toDtoSet(videoService.getByTitle(filter)), HttpStatus.OK);
     }
 
+    /**
+     * This Endpoint allows the user to Get similar Videos based on another
+     * @param videoDto          the DTO that will be mapped and transferred to the service
+     * @param numberOfMatch     the number of expected matched labels
+     * @return                  a response based on the request's treatment
+     */
     @Operation(summary = "Retrieve a list of similar videos", tags = "Video")
     @PostMapping("/similar/number/{numberOfMatch}")
     public ResponseEntity<Set<VideoDto>> getSimilar(@RequestBody @Valid VideoDto videoDto,
@@ -62,18 +78,31 @@ public class VideoController {
         return new ResponseEntity<Set<VideoDto>>(videoMapper.toDtoSet(videoService.getSimilar(videoMapper.toModel(videoDto), numberOfMatch)), HttpStatus.OK);
     }
 
+    /**
+     * This Endpoint allows the user to Get all Videos
+     * @return          a response based on the request's treatment
+     */
     @Operation(summary = "Retrieve all videos", tags = "Video")
     @GetMapping("/")
     public ResponseEntity<Set<VideoDto>> getAll() {
         return new ResponseEntity<Set<VideoDto>>(videoMapper.toDtoSet(videoService.getAll()), HttpStatus.OK);
     }
 
+    /**
+     * This Endpoint allows the user to Get all deleted Videos
+     * @return          a response based on the request's treatment
+     */
     @Operation(summary = "Retrieve all deleted videos", tags = "Video")
     @GetMapping("/deleted")
     public ResponseEntity<Set<VideoDto>> getAllDeleted() {
         return new ResponseEntity<Set<VideoDto>>(videoMapper.toDtoSet(videoService.getAllDeleted()), HttpStatus.OK);
     }
 
+    /**
+     * This Endpoint allows the user to Delete a Video based on id
+     * @param id        the video's id that will be deleted
+     * @return          a response based on the request's treatment
+     */
     @Operation(summary = "Delete a video by id", tags = "Video")
     @DeleteMapping("/{id}")
     public ResponseEntity<VideoDto> delete(@PathVariable String id) throws Exception {

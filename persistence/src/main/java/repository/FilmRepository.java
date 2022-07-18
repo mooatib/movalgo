@@ -1,8 +1,6 @@
 package repository;
 
 import model.Film;
-import model.Serie;
-import model.Video;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
@@ -15,7 +13,9 @@ public class FilmRepository {
     private static final Set<Film> inMemoryFilms = new HashSet<>();
 
     /**
-     * @param film
+     * This method add a film in memory
+     * @param film  the Film that will be added in memory
+     * @return      the Film that has been added
      */
     public Film add(Film film) {
         inMemoryFilms.add(film);
@@ -23,12 +23,19 @@ public class FilmRepository {
     }
 
     /**
-     * @return Set<Video>
+     * This method retrieves a Set of all Films from memory
+     * @return          the Set of all Films in memory
      */
     public Set<Film> getAll() {
         return inMemoryFilms;
     }
 
+    /**
+     * This method retrieves a Film from memory base on it's id
+     *
+     * @param id the Film's id that will be retrieved
+     * @return the Film from memory
+     */
     public Optional<Film> getById(String id) {
         return inMemoryFilms.stream().filter(inMemoryFilm -> inMemoryFilm.getId().equals(id)).findFirst();
     }

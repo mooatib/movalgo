@@ -27,6 +27,11 @@ public class SerieController {
         this.serieMapper = serieMapper;
     }
 
+    /**
+     * This Endpoint allows the user to Post a new Serie
+     * @param serieDto   the DTO that will be mapped and transferred to the service
+     * @return          a response based on the request's treatment
+     */
     @Operation(summary = "Create serie", tags = "Serie")
     @PostMapping("/")
     public ResponseEntity<SerieDto> add(@RequestBody SerieDto serieDto) {
@@ -38,6 +43,10 @@ public class SerieController {
         }
     }
 
+    /**
+     * This Endpoint allows the user to Get all Series
+     * @return          a response based on the request's treatment
+     */
     @Operation(summary = "Retrieve all series", tags = "Serie")
     @GetMapping("/")
     public ResponseEntity<Set<SerieDto>> getAll() {
