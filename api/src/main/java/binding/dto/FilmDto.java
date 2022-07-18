@@ -1,10 +1,15 @@
 package binding.dto;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
 
 public class FilmDto extends VideoDto {
+    @NotNull
+    @NotEmpty(message = "The director must be specified")
     private String director;
+    @NotNull(message = "The release date must be specified")
     private LocalDateTime releaseDate;
 
     public FilmDto(String id, String title, List<String> labels, String director, LocalDateTime releaseDate) {

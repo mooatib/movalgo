@@ -1,10 +1,16 @@
 package binding.dto;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public class VideoDto {
     private String id;
+    @NotNull(message = "A title must be specified")
+    @NotEmpty(message = "Title cannot be empty")
     private String title;
+    @NotNull(message = "Labels must be specified")
+    @NotEmpty(message = "Labels cannot be empty")
     private List<String> labels;
 
     public VideoDto(String id, String title, List<String> labels) {
@@ -12,7 +18,8 @@ public class VideoDto {
         this.title = title;
         this.labels = labels;
     }
-    public VideoDto(){
+
+    public VideoDto() {
 
     }
 
