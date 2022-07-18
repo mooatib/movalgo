@@ -1,6 +1,5 @@
 package repository;
 
-import model.Film;
 import model.Video;
 import org.springframework.stereotype.Component;
 
@@ -13,8 +12,18 @@ import java.util.stream.Collectors;
 public class VideoRepository {
 
 
+    private final FilmRepository filmRepository;
+
+    private final SerieRepository serieRepository;
+
     private final Set<Video> inMemoryVideos = new HashSet<>();
+
     private final Set<Video> inMemoryDeletedVideos = new HashSet<>();
+
+    public VideoRepository(FilmRepository filmRepository, SerieRepository serieRepository) {
+        this.filmRepository = filmRepository;
+        this.serieRepository = serieRepository;
+    }
 
     /**
      * @param video
@@ -29,11 +38,8 @@ public class VideoRepository {
      * @return Video
      * @throws Exception
      */
-    public Video getById(String id) throws Exception {
-        Optional<Video> videoOptional = inMemoryVideos.stream().filter(inMemoryVideo -> inMemoryVideo.getId().equals(id)).findFirst();
-        if (videoOptional.isPresent()) {
-            return videoOptional.get();
-        } else throw new Exception("");
+    public Optional<Video> getById(String id) {
+        return inMemoryVideos.stream().filter(inMemoryVideo -> inMemoryVideo.getId().equals(id)).findFirst();
     }
 
     /**
@@ -78,16 +84,14 @@ public class VideoRepository {
     }
 
     /**
-     * @param id
-     * @throws Exception
+     * @param video
      */
-    public void delete(String id) throws Exception {
-        Optional<Video> videoOptional = inMemoryVideos.stream().filter(inMemoryVideo -> inMemoryVideo.getId().equals(id)).findAny();
-        if (videoOptional.isPresent()) {
-            Video video = videoOptional.get();
+    public Video delete(Video video) {
+            filmRepository.getById(video.getId()).ifPresent(filmRepository::delete);
+            serieRepository.getById(video.getId()).ifPresent(serieRepository::delete);
             inMemoryVideos.remove(video);
             inMemoryDeletedVideos.add(video);
-        } else throw new Exception("");
+            return video;
     }
 
     /**

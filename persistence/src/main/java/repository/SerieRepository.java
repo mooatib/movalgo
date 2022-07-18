@@ -1,9 +1,11 @@
 package repository;
 
+import model.Film;
 import model.Serie;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Component
@@ -13,9 +15,11 @@ public class SerieRepository {
 
     /**
      * @param serie
+     * @return
      */
-    public void add(Serie serie) {
+    public Serie add(Serie serie) {
         inMemorySeries.add(serie);
+        return serie;
     }
 
     /**
@@ -25,6 +29,13 @@ public class SerieRepository {
         return inMemorySeries;
     }
 
+    public Optional<Serie> getById(String id) {
+        return inMemorySeries.stream().filter(inMemorySerie -> inMemorySerie.getId().equals(id)).findFirst();
+    }
+
+    public void delete(Serie serie) {
+        inMemorySeries.remove(serie);
+    }
     /**
      * @return int
      */
