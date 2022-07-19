@@ -54,6 +54,8 @@ public class VideoService {
 
     public Video delete(String id) throws Exception {
         Video video = getById(id);
-        return videoRepository.delete(video);
+        Video deletedVideo = videoRepository.delete(video);
+        LoggerFactory.getLogger(getClass()).info("A video has been deleted");
+        return deletedVideo;
     }
 }

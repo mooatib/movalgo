@@ -3,6 +3,7 @@ package service;
 import exception.SerieException;
 import model.Serie;
 import model.Video;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import repository.SerieRepository;
 import repository.VideoRepository;
@@ -28,6 +29,7 @@ public class SerieService {
         }
         serie.setId(String.valueOf(videoRepository.getSize() + videoRepository.getAllDeleted().size() + 1));
         videoRepository.add(serie);
+        LoggerFactory.getLogger(getClass()).info("A serie has been created");
         return serieRepository.add(serie);
     }
 

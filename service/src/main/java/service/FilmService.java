@@ -3,6 +3,7 @@ package service;
 import exception.FilmException;
 import model.Film;
 import model.Video;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import repository.FilmRepository;
 import repository.VideoRepository;
@@ -28,6 +29,7 @@ public class FilmService {
         }
         film.setId(String.valueOf(videoRepository.getSize() + videoRepository.getAllDeleted().size() + 1));
         videoRepository.add(film);
+        LoggerFactory.getLogger(getClass()).info("A film has been created");
         return filmRepository.add(film);
     }
 
